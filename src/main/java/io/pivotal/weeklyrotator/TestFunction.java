@@ -5,10 +5,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
-import com.google.api.services.gmail.GmailScopes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,21 +24,13 @@ import java.time.temporal.WeekFields;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @ShellComponent
 public class TestFunction {
 
     private static final String APPLICATION_NAME = "Weekly Report Rotator";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
-    /**
-     * Global instance of the scopes required by this quickstart.
-     * If modifying these scopes, delete your previously saved tokens/ folder.
-     */
-    private static final List<String> SCOPES = Stream.of(DriveScopes.DRIVE, GmailScopes.GMAIL_COMPOSE).collect(Collectors.toList());
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
 
     @Value("${weekly_rotator.weekly_report_template_id}")
     private String WEEKLY_REPORT_TEMPLATE_ID;
@@ -66,7 +56,7 @@ public class TestFunction {
     }
 
     @ShellMethod(value = "Check weekly reports", key = "check")
-    @Scheduled(cron = "0 * * * * MON-FRI")
+    @Scheduled(cron = "0 0 9 ? * MON")
     public void check() throws IOException {
         // Build the Name of the Weekly Report
         LocalDateTime now = LocalDateTime.now();
@@ -99,7 +89,6 @@ public class TestFunction {
             System.out.println("Weekly Report already exists:");
             for (File file : files) {
                 System.out.printf("%s (%s) link: %s\n", file.getName(), file.getId(), file.getWebViewLink());
-                gmail.sendWeeklyRotated(file.getWebViewLink());
             }
         }
     }
