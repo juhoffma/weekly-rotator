@@ -8,6 +8,7 @@ import com.google.api.client.util.Base64;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
@@ -35,6 +36,12 @@ public class GMailService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Value("${weekly_rotator.mail.from}")
+    private String from;
+
+    @Value("${weekly_rotator.mail.to}")
+    private String to;
+
     @PostConstruct
     public void init() throws GeneralSecurityException, IOException {
         // Build a new authorized API client service.
@@ -50,9 +57,9 @@ public class GMailService {
             Session session = Session.getDefaultInstance(props, null);
             MimeMessageHelper messageHelper = new MimeMessageHelper(new MimeMessage(session), true, "UTF-8");
 
-            messageHelper.setFrom("jhoffmann@pivotal.io");
-            messageHelper.setTo("hoffmann@apache.org");
-            messageHelper.setSubject("Mail Test");
+            messageHelper.setFrom(from);
+            messageHelper.setTo(to);
+            messageHelper.setSubject("Weekly Report Rotated");
 
             Context ctx = new Context();
             ctx.setVariable("url", url);

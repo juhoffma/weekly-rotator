@@ -4,3 +4,6 @@ spring:
 weekly_rotator:
   weekly_report_folder_id: 0B9XNf23Qd2uENUczSHlRdkswYjA
   weekly_report_template_id: 1rIr1Z4tDk-Inqm-_xKl2U9z61EZX_8rxQESRjt-SB20
+  mail:
+    from: jhoffmann@pivotal.io
+    to: hoffmann@apache.org
