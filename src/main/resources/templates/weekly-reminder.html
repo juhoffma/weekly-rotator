@@ -1,0 +1,141 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Report Rotated</title>
+    <style type="text/css">
+        html {
+            font-size: 16px;
+            height: 100%;
+            font-family: sans-serif;
+            display: block;
+        }
+
+        body {
+            padding: 0;
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-left: 25px;
+            margin-bottom: 25px;
+            height: 100%;
+            display: block;
+            font-family: 'Lato', sans-serif;
+        }
+
+        h2 {
+            display: inline-block;
+            max-width: 100%;
+            font-family: 'Lato', sans-serif;
+            font-size: 25px;
+            font-weight: bold;
+            line-height: 1.4;
+            padding-top: 20px;
+            color: rgba(34, 110, 147, 1);
+            font-variant-ligatures: none;
+        }
+
+        ul {
+            display: block;
+            direction: ltr;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            list-style-type: square;
+            margin-bottom: 6px;
+        }
+
+        li {
+            margin-top: 3px;
+            padding-top: inherit;
+            margin-bottom: 6px;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            line-height: 1.667;
+            color: rgba(33, 33, 33, 1);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body>
+Hi Guys,
+<div><br>
+</div>
+
+<p>This is a friendly reminder to fill out your weekly report, which we prepared. You can find it here:</p>
+
+<div>
+    <a target="_blank" th:href="${url}">[[${url}]]</a>
+</div>
+<p/>
+<p>Remember to adhere to the correct format. Details on the format can be found here: <a
+        href="https://sites.google.com/pivotal.io/pa-wiki/sales-play/weekly-status?authuser=0" target="_blank">https://sites.google.com/pivotal.io/pa-wiki/sales-play/weekly-status?authuser=0</a> 
+</p>
+<p>I have also added the information below: </p>
+<div>
+    <h2>Why</h2>
+    <p>The weekly status reports are key to providing leadership and executive staff insight into:</p>
+    <ul>
+        <li>Which accounts do we spend most of our time in?</li>
+        <li>Which PAs are spending most of their time on an account?</li>
+        <li>Has the activity been consistent? Or in spurts?</li>
+        <li>How is the activity by play steps accounts?</li>
+        <li>Where are we doing workshops and POCs?</li>
+        <li>How is our activity at big $$ focus accounts?</li>
+        <li>Other key questions like competition etc…</li>
+    </ul>
+    <p>All this data is parsed and fed into the <a
+            href="https://elcid-web3.pivotal.io/#/site/FieldEngineering/views/PAD3/PADash" target="_blank">PA Activity
+        Dashboard</a> (PAD). Arni has recorded a <a
+            href="https://drive.google.com/file/d/0B2Tbe2wqy2j9bXZUUVNvcXRFUEk/view" target="_blank">lighting talk</a>
+        which explains how this data is being used.</p>
+    <h2>Weekly Entry Format</h2>
+    <ul>
+        <li><strong>POSITIVE / FLAT / NEGATIVE </strong>- Each customer interaction should be placed in a section based
+            on outcome.
+        </li>
+        <li><strong>#[COMPANY_NAME] - </strong>Name of the company.</li>
+        <li><strong>%[PLAY_STEP]</strong> - See <a
+                href="https://sites.google.com/pivotal.io/pa-wiki/sales-play?authuser=0" target="_blank">here</a> for
+            the sales play steps
+        </li>
+        <li><strong>@[PA_NAME] </strong>- FirstnameLastname format</li>
+        <li><strong>*[PARTNER_NAME]</strong> - If working with a partner like Dell, VMware, Cognizant...</li>
+    </ul>
+    <h2>Weekly Reporting Flow - Americas</h2>
+    <ul>
+        <li><strong>PAs</strong> to submit weekly report by <strong>COB Friday</strong></li>
+        <li><strong>PA Area Leaders</strong> to review and add comments to the weekly report, then submit an area
+            summary by<strong> COB Monday.</strong></li>
+    </ul>
+    <h2>What Good Looks Like</h2>
+    <p><strong>Accounts with POSITIVE activity this week</strong></p>
+    <p>#Fiserv - %AppE - @ChrisDelashmutt and @MichaelWright met with multiple members from the Digital channels
+        architects team. It was planned as a deep dive meeting as they wanted to understand how .NET in PCF works. The
+        lead architect John Doe had a ton of good questions which I think we fielded well. John Doe was not in favor of
+        .NET on PCF last year. He said he was impressed with PCF&rsquo;s .NET abilities and that we have come a long way
+        with product maturity. Next step is a hands on workshop with the dev team</p>
+    <h2>Tips/Tricks</h2>
+    <ul>
+        <li>Do not use sub-bullets! Explain each interaction with a single bullet in paragraph form. This makes the
+            report easier to parse and read. Keep in mind that our weekly status can exceed 50 pages.
+        </li>
+        <li>If a step is not in the play, use a descriptive word (Ex: #internalprep)</li>
+        <li>If multiple people participated in an interaction, denote with additional @FirstnameLastname tags. There is
+            no need to copy/paste multiple status entries for each PA.
+        </li>
+        <li>Be descriptive but no need to be very verbose. We care about: 1) Who did you meet: name and title. 2)
+            Purpose of meeting. 3) What was done in meeting. 4) Meeting outcome - did we move the account in a positive,
+            negative or flat way.
+        </li>
+        <li>If you have <strong>Competitive Trends</strong>, <strong>Product Trend Updates</strong> or <strong>Other
+            Noteworthy Items</strong>, please document under your area leader section. Your PA lead will read and
+            possibly comment on your valuable intel.
+        </li>
+    </ul>
+    <div><br>
+    </div>
+</div>
+<div>Thanks for filling it out by Friday EoB.</div>
+</body>
+</html>

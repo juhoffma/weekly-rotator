@@ -1,0 +1,55 @@
+Hi Guys,
+
+This is a friendly reminder to fill out your weekly report, which we prepared. You can find it here:
+
+[(${url})]
+
+Remember to adhere to the correct format. Details on the format can be found here:
+https://sites.google.com/pivotal.io/pa-wiki/sales-play/weekly-status?authuser=0
+
+I have also added the information below:
+
+# Why
+
+The weekly status reports are key to providing leadership and executive staff insight into:
+
+- Which accounts do we spend most of our time in?
+- Which PAs are spending most of their time on an account?
+- Has the activity been consistent? Or in spurts?
+- How is the activity by play steps accounts?
+- Where are we doing workshops and POCs?
+- How is our activity at big $$ focus accounts?
+- Other key questions like competition etc…
+- All this data is parsed and fed into the PA Activity Dashboard (PAD).
+
+Arni has recorded a lighting talk which explains how this data is being used.
+
+# Weekly Entry Format
+
+- POSITIVE / FLAT / NEGATIVE - Each customer interaction should be placed in a section based on outcome.
+- #[COMPANY_NAME] - Name of the company.
+- %[PLAY_STEP]  - See here for the sales play steps
+- @[PA_NAME] - FirstnameLastname format
+- *[PARTNER_NAME] - If working with a partner like Dell, VMware, Cognizant...
+- Weekly Reporting Flow - Americas
+- PAs to submit weekly report by COB Friday
+
+PA Area Leaders to review and add comments to the weekly report, then submit an area summary by COB Monday.
+
+# What Good Looks Like
+
+Accounts with POSITIVE activity this week
+
+#Fiserv - %AppE - @ChrisDelashmutt and @MichaelWright met with multiple members from the Digital channels architects team. It was planned as a deep dive meeting as they wanted to understand how .NET in PCF works. The lead architect John Doe had a ton of good questions which I think we fielded well. John Doe was not in favor of .NET on PCF last year. He said he was impressed with PCF’s .NET abilities and that we have come a long way with product maturity.  Next step is a hands on workshop with the dev team
+
+# Tips/Tricks
+
+- Do not use sub-bullets! Explain each interaction with a single bullet in paragraph form. This makes the report easier to parse and read. Keep in mind that our weekly status can exceed 50 pages.
+- If a step is not in the play, use a descriptive word (Ex: #internalprep)
+- If multiple people participated in an interaction, denote with additional @FirstnameLastname tags. There is no need to copy/paste multiple status entries for each PA.
+- Be descriptive but no need to be very verbose. We care about: 1) Who did you meet: name and title. 2) Purpose of meeting. 3) What was done in meeting. 4) Meeting outcome - did we move the account in a positive, negative or flat way.
+- If you have Competitive Trends, Product Trend Updates or Other Noteworthy Items, please document under your area leader section. Your PA lead will read and possibly comment on your valuable intel.
+
+Thanks for filling it out by Friday EoB.
+
+Central Management Team

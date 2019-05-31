@@ -58,39 +58,64 @@ public class TestFunction {
     @ShellMethod(value = "Check weekly reports", key = "check")
     @Scheduled(cron = "0 0 9 ? * MON")
     public void check() throws IOException {
+        String weeklyReportName = getWeeklyReportName();
+        File weekly = getWeeklyReport(weeklyReportName);
+
+        if (weekly == null) {
+            File copy = createWeekly(weeklyReportName);
+            gmail.sendWeeklyRotated(copy.getWebViewLink());
+
+        } else {
+            System.out.printf("Weekly Report already exists: %s (%s) link: %s\n", weekly.getName(), weekly.getId(), weekly.getWebViewLink());
+        }
+    }
+
+    @ShellMethod(value = "Send a weekly Report Reminder", key = "reminder")
+    @Scheduled(cron = "0 0 9 ? * WED")
+    public void reminder() throws IOException {
+        String weeklyReportName = getWeeklyReportName();
+        File weekly = getWeeklyReport(weeklyReportName);
+
+        if (weekly == null) {
+            File copy = createWeekly(weeklyReportName);
+            gmail.sendWeeklyReminder(copy.getWebViewLink());
+        } else {
+            gmail.sendWeeklyReminder(weekly.getWebViewLink());
+        }
+    }
+
+    private File createWeekly(String weeklyReportName) throws IOException {
+        System.out.println("Weekly Report not found, creating it");
+        File weeklyReport = new File();
+        weeklyReport.setName(weeklyReportName);
+        weeklyReport.setParents(Collections.singletonList(WEEKLY_REPORT_FOLDER_ID));
+
+        File copy = gdrive.files().copy(WEEKLY_REPORT_TEMPLATE_ID, weeklyReport).execute();
+        System.out.printf("Copy created %s (%s) link: %s\n", copy.getName(), copy.getId(), copy.getWebViewLink());
+        return copy;
+    }
+
+    private String getWeeklyReportName() {
         // Build the Name of the Weekly Report
         LocalDateTime now = LocalDateTime.now();
         TemporalField fieldISO = WeekFields.of(Locale.GERMANY).dayOfWeek();
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH);
-        String weeklyReportName = String.format("Weekly Report - %s", format.format(now.with(fieldISO, 5L)));
+        return String.format("Weekly Report - %s", format.format(now.with(fieldISO, 5L)));
+    }
 
-        System.out.println(String.format("Searching for: name = '%s' and '%s' in parents", weeklyReportName, WEEKLY_REPORT_FOLDER_ID));
+    private File getWeeklyReport(String name) throws IOException {
+        System.out.println(String.format("Searching for: name = '%s' and '%s' in parents", name, WEEKLY_REPORT_FOLDER_ID));
 
         // Check if a weekly report document already exists
         FileList result = gdrive.files().list()
-                .setQ(String.format("name = '%s' and '%s' in parents", weeklyReportName, WEEKLY_REPORT_FOLDER_ID))
+                .setQ(String.format("name = '%s' and '%s' in parents", name, WEEKLY_REPORT_FOLDER_ID))
                 .setSpaces("drive")
                 //.setFields("nextPageToken, files(id, name)")
                 .setFields("*")
                 .execute();
         List<File> files = result.getFiles();
-        if (files == null || files.isEmpty()) {
-            System.out.println("Weekly Report not found, creating it");
-            File weeklyReport = new File();
-            weeklyReport.setName(weeklyReportName);
-            weeklyReport.setParents(Collections.singletonList(WEEKLY_REPORT_FOLDER_ID));
-
-            File copy = gdrive.files().copy(WEEKLY_REPORT_TEMPLATE_ID, weeklyReport).execute();
-            System.out.printf("Copy created %s (%s) link: %s\n", copy.getName(), copy.getId(), copy.getWebViewLink());
-
-            gmail.sendWeeklyRotated(copy.getWebViewLink());
-        } else {
-            System.out.println("Weekly Report already exists:");
-            for (File file : files) {
-                System.out.printf("%s (%s) link: %s\n", file.getName(), file.getId(), file.getWebViewLink());
-            }
-        }
+        return (files == null || files.isEmpty()) ? null : files.get(0);
     }
 
     @ShellMethod(value = "Add numbers.", key = "sum")

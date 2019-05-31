@@ -66,17 +66,46 @@ public class GMailService {
 
             messageHelper.setText(this.templateEngine.process("weekly-rotated.txt", ctx), this.templateEngine.process("weekly-rotated.html", ctx));
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            messageHelper.getMimeMessage().writeTo(buffer);
-            byte[] bytes = buffer.toByteArray();
-            String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
-            Message message = new Message();
-            message.setRaw(encodedEmail);
+            Message message = getBase64UrlEncodedMessage(messageHelper);
             gmail.users().messages().send("jhoffmann@pivotal.io", message).execute();
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendWeeklyReminder(String url) {
+        try {
+            Properties props = new Properties();
+            Session session = Session.getDefaultInstance(props, null);
+            MimeMessageHelper messageHelper = new MimeMessageHelper(new MimeMessage(session), true, "UTF-8");
+
+            messageHelper.setFrom(from);
+            messageHelper.setTo(to);
+            messageHelper.setSubject("Weekly Report Reminder");
+
+            Context ctx = new Context();
+            ctx.setVariable("url", url);
+
+            messageHelper.setText(this.templateEngine.process("weekly-reminder.txt", ctx), this.templateEngine.process("weekly-reminder.html", ctx));
+
+            Message message = getBase64UrlEncodedMessage(messageHelper);
+            gmail.users().messages().send("jhoffmann@pivotal.io", message).execute();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Message getBase64UrlEncodedMessage(MimeMessageHelper messageHelper) throws IOException, MessagingException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        messageHelper.getMimeMessage().writeTo(buffer);
+        byte[] bytes = buffer.toByteArray();
+        String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
+        Message message = new Message();
+        message.setRaw(encodedEmail);
+        return message;
     }
 }
