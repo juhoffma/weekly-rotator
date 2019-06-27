@@ -56,7 +56,7 @@ public class GoogleApiAuthService {
                     .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                     .setAccessType("offline")
                     .build();
-            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
             this.credentials = new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
         }
         return credentials;
