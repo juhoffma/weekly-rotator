@@ -89,7 +89,18 @@ public class TestFunction {
         weeklyReport.setName(weeklyReportName);
         weeklyReport.setParents(Collections.singletonList(WEEKLY_REPORT_FOLDER_ID));
 
+        // This will create a copy without a link. There fore we have to get the file again
         File copy = gdrive.files().copy(WEEKLY_REPORT_TEMPLATE_ID, weeklyReport).execute();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Getting the newly created weekly report with the link to it
+        copy = getWeeklyReport(copy.getName());
+
         System.out.printf("Copy created %s (%s) link: %s\n", copy.getName(), copy.getId(), copy.getWebViewLink());
         return copy;
     }
@@ -104,7 +115,7 @@ public class TestFunction {
     }
 
     private File getWeeklyReport(String name) throws IOException {
-        System.out.println(String.format("Searching for: name = '%s' and '%s' in parents", name, WEEKLY_REPORT_FOLDER_ID));
+        System.out.println(String.format("Searching for: name = '%s' in folder '%s'", name, WEEKLY_REPORT_FOLDER_ID));
 
         // Check if a weekly report document already exists
         FileList result = gdrive.files().list()
