@@ -55,7 +55,7 @@ The reminder mail works similarly.
 The tool uses the following 2 files for configuration `application-dev.yml`
 and `application-prod.yml` within those there are 2 sections. `spring` and `weekly-rotator`
 
-Leave `spring`alone. Only configure `weekly-rotator` section. 
+Leave `spring` alone. Only configure `weekly-rotator` section. 
 
 ```
 weekly_rotator:
