@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Disabled</key>
+	<false/>
+	<key>Label</key>
+	<string>io.pivotal.weekly-rotator.check</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/buddy/.jenv/shims/java</string>
+		<string>-Dspring.profiles.active=prod</string>
+		<string>-jar</string>
+		<string>target/weekly-rotator-0.0.1-SNAPSHOT.jar</string>
+		<string>check</string>
+	</array>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>10</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+	<key>WorkingDirectory</key>
+	<string>/Users/buddy/dev/weekly-rotator</string>
+</dict>
+</plist>
