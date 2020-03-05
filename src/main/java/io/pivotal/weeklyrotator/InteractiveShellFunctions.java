@@ -9,7 +9,6 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -25,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 @ShellComponent
-public class TestFunction {
+public class InteractiveShellFunctions {
 
     private static final String APPLICATION_NAME = "Weekly Report Rotator";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -54,8 +53,15 @@ public class TestFunction {
                 .build();
     }
 
+    public void run() {
+        try {
+            check();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @ShellMethod(value = "Check weekly reports", key = "check")
-    @Scheduled(cron = "0 0 9 ? * MON")
     public void check() throws IOException {
         String weeklyReportName = getWeeklyReportName();
         File weekly = getWeeklyReport(weeklyReportName);
@@ -70,7 +76,6 @@ public class TestFunction {
     }
 
     @ShellMethod(value = "Send a weekly Report Reminder", key = "reminder")
-    @Scheduled(cron = "0 0 9 ? * WED")
     public void reminder() throws IOException {
         String weeklyReportName = getWeeklyReportName();
         File weekly = getWeeklyReport(weeklyReportName);
@@ -119,8 +124,8 @@ public class TestFunction {
         return (files == null || files.isEmpty()) ? null : files.get(0);
     }
 
-    @ShellMethod("End the rotator")
+/*    @ShellMethod("End the rotator")
     public void quit() {
         System.exit(0);
-    }
+    }*/
 }
